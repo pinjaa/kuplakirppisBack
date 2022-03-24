@@ -12,7 +12,7 @@ CREATE TABLE tuote (
     tuotenimi VARCHAR(255),
     hinta DOUBLE(10,2), 
     kuvaus TEXT, 
-    ktg_nro INT FOREIGN KEY REFERENCES kategoria(ktg_nro)
+    ktg_nro INT
 );
 
 -- asiakastili taulu
@@ -29,13 +29,33 @@ DROP TABLE IF EXISTS tilaus;
 CREATE TABLE tilaus (
     tilausnro INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
     tilauspvm DATE,
-    asiakasnro INT FOREIGN KEY REFERENCES as_tili(asiakasnro)
+    asiakasnro INT
 );
 
 -- tilausrivi taulu
 DROP TABLE IF EXISTS tilausrivi;
 CREATE TABLE tilausrivi (
-    rivinro INT NOT NULL AUTO_INCREMENT,
-    tilausnro INT FOREIGN KEY REFERENCES tilaus(tilausnro),
-    tuotenro INT FOREIGN KEY REFERENCES tuote(tuotenro)
+    rivinro INT NOT NULL,
+    tilausnro INT, 
+    tuotenro INT
 );
+
+
+
+-- foreign key lisäykset, ei toimineet taulujen luonnin yhteydessä
+ALTER TABLE tilaus
+ADD FOREIGN KEY (asiakasnro) REFERENCES as_tili(asiakasnro);
+
+ALTER TABLE tuote
+ADD FOREIGN KEY (ktg_nro) REFERENCES kategoria(ktg_nro);
+
+ALTER TABLE tilausrivi
+ADD FOREIGN KEY (tilausnro) REFERENCES tilaus(tilausnro);
+
+ALTER TABLE tilausrivi
+ADD FOREIGN KEY (tuotenro) REFERENCES tuote(tuotenro);
+
+
+-- testi hommat
+INSERT INTO kategoria (ktg_nimi) values ('Vaatteet');
+INSERT INTO kategoria (ktg_nimi) values ('Elektroniikka ja kodinkoneet');
