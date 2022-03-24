@@ -3,7 +3,7 @@ DROP TABLE IF EXISTS kategoria;
 CREATE TABLE kategoria (
     ktg_nro int NOT NULL PRIMARY KEY AUTO_INCREMENT,
     ktg_nimi VARCHAR(255)
-)
+);
 
 -- tuote taulu
 DROP TABLE IF EXISTS tuote;
@@ -35,7 +35,7 @@ CREATE TABLE tilaus (
 -- tilausrivi taulu
 DROP TABLE IF EXISTS tilausrivi;
 CREATE TABLE tilausrivi (
-    rivinro INT NOT NULL AUTO_INCREMENT
+    rivinro INT NOT NULL AUTO_INCREMENT,
     tilausnro INT FOREIGN KEY REFERENCES tilaus(tilausnro),
     tuotenro INT FOREIGN KEY REFERENCES tuote(tuotenro)
-)
+);
