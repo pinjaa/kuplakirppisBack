@@ -1,3 +1,8 @@
+-- tietokannan luontilause
+DROP database if EXISTS kuplakirppis;
+CREATE database kuplakirppis;
+use kuplakirppis;
+
 -- kategoria taulu
 DROP TABLE IF EXISTS kategoria;
 CREATE TABLE kategoria (
