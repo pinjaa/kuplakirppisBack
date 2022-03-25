@@ -61,6 +61,11 @@ ALTER TABLE tilausrivi
 ADD FOREIGN KEY (tuotenro) REFERENCES tuote(tuotenro);
 
 
--- testi hommat
+-- tuoteryhmien lisäys
 INSERT INTO kategoria (ktg_nimi) values ('Vaatteet');
 INSERT INTO kategoria (ktg_nimi) values ('Elektroniikka ja kodinkoneet');
+INSERT INTO kategoria (ktg_nimi) values ('Ajoneuvot');
+INSERT INTO kategoria (ktg_nimi) values ('Hifi');
+INSERT INTO kategoria (ktg_nimi) values ('Keittiö');
+INSERT INTO kategoria (ktg_nimi) values ('Koti');
+INSERT INTO kategoria (ktg_nimi) values ('Vapaa-aika');
