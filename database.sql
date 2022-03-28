@@ -59,7 +59,7 @@ ALTER TABLE tilausrivi
 ADD FOREIGN KEY (tilausnro) REFERENCES tilaus(tilausnro);
 
 ALTER TABLE tilausrivi
-ADD FOREIGN KEY (tuotenro) REFERENCES tuote(tuotenro);
+ADD FOREIGN KEY (id) REFERENCES tuote(id);
 
 
 -- tuoteryhmien lisäys
