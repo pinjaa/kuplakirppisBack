@@ -14,8 +14,8 @@ CREATE TABLE kategoria (
 DROP TABLE IF EXISTS tuote;
 CREATE TABLE tuote (
     tuotenro int NOT NULL PRIMARY KEY AUTO_INCREMENT,
-    tuotenimi VARCHAR(255),
-    hinta DOUBLE(10,2), 
+    tuotenimi VARCHAR(255) NOT NULL,
+    hinta DOUBLE(10,2) NOT NULL, 
     kuvaus TEXT, 
     ktg_nro INT
 );
@@ -69,3 +69,6 @@ INSERT INTO kategoria (ktg_nimi) values ('Hifi');
 INSERT INTO kategoria (ktg_nimi) values ('Keittiö');
 INSERT INTO kategoria (ktg_nimi) values ('Koti');
 INSERT INTO kategoria (ktg_nimi) values ('Vapaa-aika');
+
+-- tuote taulun testauslauseet
+INSERT INTO tuote(tuotenimi, hinta, ktg_nro) values ("kenkä", 10, 1);
