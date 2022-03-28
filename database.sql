@@ -13,9 +13,10 @@ CREATE TABLE kategoria (
 -- tuote taulu
 DROP TABLE IF EXISTS tuote;
 CREATE TABLE tuote (
-    tuotenro int NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    id int PRIMARY KEY AUTO_INCREMENT,
     tuotenimi VARCHAR(255) NOT NULL,
     hinta DOUBLE(10,2) NOT NULL, 
+    image VARCHAR(50),
     kuvaus TEXT, 
     ktg_nro INT
 );
