@@ -72,6 +72,6 @@ INSERT INTO kategoria (ktg_nimi) values ('Koti');
 INSERT INTO kategoria (ktg_nimi) values ('Vapaa-aika');
 
 -- tuote taulun testauslauseet
-INSERT INTO tuote(tuotenimi, hinta, ktg_nro) values ("kenkä", 10, 1);
+INSERT INTO tuote(tuotenimi, hinta, ktg_nro, image, kuvaus) values ("kenkä", 10, 1, "https://cdn.pixabay.com/photo/2013/07/13/10/45/shoes-157716_1280.png", "Voi miten hienot kengät, osta osta!");
 INSERT INTO tuote(tuotenimi, hinta, ktg_nro) values ("paita", 5, 1);
 INSERT INTO tuote(tuotenimi, hinta, ktg_nro) values ("pyykkikone", 50, 2);
