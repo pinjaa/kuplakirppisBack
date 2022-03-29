@@ -73,3 +73,5 @@ INSERT INTO kategoria (ktg_nimi) values ('Vapaa-aika');
 
 -- tuote taulun testauslauseet
 INSERT INTO tuote(tuotenimi, hinta, ktg_nro) values ("kenkä", 10, 1);
+INSERT INTO tuote(tuotenimi, hinta, ktg_nro) values ("paita", 5, 1);
+INSERT INTO tuote(tuotenimi, hinta, ktg_nro) values ("pyykkikone", 50, 2);
