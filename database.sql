@@ -16,7 +16,7 @@ CREATE TABLE tuote (
     id int PRIMARY KEY AUTO_INCREMENT,
     tuotenimi VARCHAR(255) NOT NULL,
     hinta DOUBLE(10,2) NOT NULL, 
-    image VARCHAR(50),
+    image VARCHAR(255),
     kuvaus TEXT, 
     ktg_nro INT
 );
@@ -72,6 +72,6 @@ INSERT INTO kategoria (ktg_nimi) values ('Koti');
 INSERT INTO kategoria (ktg_nimi) values ('Vapaa-aika');
 
 -- tuote taulun testauslauseet
-INSERT INTO tuote(tuotenimi, hinta, ktg_nro, image, kuvaus) values ("kenkä", 10, 1, "https://cdn.pixabay.com/photo/2013/07/13/10/45/shoes-157716_1280.png", "Voi miten hienot kengät, osta osta!");
-INSERT INTO tuote(tuotenimi, hinta, ktg_nro) values ("paita", 5, 1);
-INSERT INTO tuote(tuotenimi, hinta, ktg_nro) values ("pyykkikone", 50, 2);
+INSERT INTO tuote(tuotenimi, hinta, ktg_nro, image, kuvaus) values ("Kengät", 10, 1, "https://cdn.pixabay.com/photo/2013/07/13/10/45/shoes-157716_1280.png", "Voi miten hienot kengät, osta osta!");
+INSERT INTO tuote(tuotenimi, hinta, ktg_nro, image, kuvaus) values ("Puhelin", 100, 2, "https://cdn.pixabay.com/photo/2013/07/12/18/39/smartphone-153650_1280.png", "Ostappa uusi ja mahtava puhelin.");
+INSERT INTO tuote(tuotenimi, hinta, ktg_nro, image, kuvaus) values ("Auto", 50, 3, "https://cdn.pixabay.com/photo/2012/05/29/00/43/car-49278_1280.jpg", "Loistava ja nopea auto.");
