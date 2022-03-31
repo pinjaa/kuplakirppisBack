@@ -25,9 +25,11 @@ CREATE TABLE tuote (
 DROP TABLE IF EXISTS as_tili;
 CREATE TABLE as_tili (
     asiakasnro int NOT NULL PRIMARY KEY AUTO_INCREMENT,
-    tunnus VARCHAR(30),
-    salasana VARCHAR(20), 
-    email VARCHAR(50)
+    etunimi VARCHAR(150),
+    sukunimi VARCHAR(150),
+    tunnus VARCHAR(150),
+    salasana VARCHAR(150), 
+    email VARCHAR(150)
 );
 
 -- tilaus taulu
