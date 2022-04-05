@@ -8,27 +8,27 @@ require_once "../inc/headers.php";
 
  $fname = filter_input(INPUT_POST, "etunimi");
  $lname = filter_input(INPUT_POST, "sukunimi");
- $uname=filter_input(INPUT_POST, "tunnus");
  $pword=filter_input(INPUT_POST, "salasana");
  $email=filter_input(INPUT_POST,"email",FILTER_SANITIZE_EMAIL);
 
  //Tarkistetaan onko muttujia asetettu
- if( !isset($uname) || !isset($pword) ){
+ if( !isset($email) || !isset($pword) ){
      echo "Parametreja puuttui!! Ei voida kirjautua.";
      exit;
  }
 
  //Tarkistetaan, ettei tyhjiä arvoja muuttujissa
- if( empty($uname) || empty($pword) ){
+ if( empty($email) || empty($pword) ){
      echo "Et voi asettaa tyhjiä arvoja!!";
      exit;
  }
 
  try{
-     //Haetaan käyttäjä annetulla käyttäjänimellä
-     $sql = "SELECT * FROM person WHERE username=?";
-     $statement = $pdo->prepare($sql);
-     $statement->bindParam(1, $uname);
+    $db = openDB();
+     //Haetaan käyttäjä annetulla sähköpostiosoitteella
+     $sql = "SELECT * FROM as_tili WHERE email=?";
+     $statement = $db->prepare($sql);
+     $statement->bindParam(1, $email);
      $statement->execute();
 
      if($statement->rowCount() <=0){
@@ -39,15 +39,15 @@ require_once "../inc/headers.php";
      $row = $statement->fetch();
 
      //Tarkistetaan käyttäjän antama salasana tietokannan salasanaa vasten
-     if(!password_verify($pword, $row["password"] )){
+     if(!password_verify($pword, $row["salasana"] )){
          echo "Väärä salasana!!";
          exit;
      }
 
      //Jos käyttäjä tunnistettu, talletetaan käyttäjän tiedot sessioon
-     $_SESSION["username"] = $uname;
-     $_SESSION["fname"] = $row["firstname"];
-     $_SESSION["lname"] = $row["lastname"];
+     $_SESSION["email"] = $email;
+     $_SESSION["fname"] = $row["etunimi"];
+     $_SESSION["lname"] = $row["sukunimi"];
 
      //Ohjataan takaisin etusivulle
      header("Location: ../../public/index.php"); 
