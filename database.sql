@@ -78,5 +78,7 @@ INSERT INTO kategoria (ktg_nimi) values ('Vapaa-aika');
 
 -- tuote taulun testauslauseet
 INSERT INTO tuote(tuotenimi, hinta, ktg_nro, image, kuvaus) values ("Kengät", 10, 1, "https://cdn.pixabay.com/photo/2013/07/13/10/45/shoes-157716_1280.png", "Voi miten hienot kengät, osta osta!");
+INSERT INTO tuote(tuotenimi, hinta, ktg_nro, image, kuvaus) values ("Kengät2", 5, 1, "https://cdn.pixabay.com/photo/2013/07/13/10/45/shoes-157716_1280.png", "Voi miten hienot kengät, osta osta!");
+INSERT INTO tuote(tuotenimi, hinta, ktg_nro, image, kuvaus) values ("Kengät3", 7, 1, "https://cdn.pixabay.com/photo/2013/07/13/10/45/shoes-157716_1280.png", "Voi miten hienot kengät, osta osta!");
 INSERT INTO tuote(tuotenimi, hinta, ktg_nro, image, kuvaus) values ("Puhelin", 100, 2, "https://cdn.pixabay.com/photo/2013/07/12/18/39/smartphone-153650_1280.png", "Ostappa uusi ja mahtava puhelin.");
 INSERT INTO tuote(tuotenimi, hinta, ktg_nro, image, kuvaus) values ("Auto", 50, 3, "https://cdn.pixabay.com/photo/2012/05/29/00/43/car-49278_1280.jpg", "Loistava ja nopea auto.");
