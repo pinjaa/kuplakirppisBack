@@ -27,12 +27,10 @@ if( empty($fname) || empty($lname) || empty($address) || empty($zip) || empty($c
 try{
     $db = openDB();
     //Suoritetaan parametrien lisääminen tietokantaan.
-    $sql = "SELECT as_tili.asiakasnro FROM as_tili where email=:email
-    INNER JOIN tilaus ON as_tili.asiakasnro = tilaus.asiakasnro;
-    INSERT INTO tilaus (asiakasnro, tilauspvm) VALUES (':email', curdate())";
+    $sql = "INSERT INTO tilaus (asiakasnro, tilauspvm) VALUES ((SELECT asiakasnro FROM as_tili where email=:email), curdate())";
+
     $statement = $db->prepare($sql);
-    $statement->bindParam(':email', $email);
-    
+    $statement->bindParam(':email', $email, PDO::PARAM_STR);
     $statement->execute();
 
     echo "Henkilön ".$fname." ".$lname." tilaus lisätty tietokantaan."; 
