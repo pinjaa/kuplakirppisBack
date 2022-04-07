@@ -12,11 +12,11 @@ $city=filter_input(INPUT_POST, "postitmp");
 $email=filter_input(INPUT_POST,"email",FILTER_SANITIZE_EMAIL);
 $phone=filter_input(INPUT_POST, "puhelinnro");
 
-//Tarkistetaan onko muuttujia asetettu
+/* //Tarkistetaan onko muuttujia asetettu
 if( !isset($fname) || !isset($lname) || !isset($address) || !isset($zip) || !isset($city) || !isset($email) || !isset($phone)){
     echo "Tietoja puuttui, tilaus ei onnistunut";
     exit;
-}
+} */
 
 //Tarkistetaan, ettei tyhjiä arvoja muuttujissa
 if( empty($fname) || empty($lname) || empty($address) || empty($zip) || empty($city) || empty($email) || empty($phone)){
@@ -27,12 +27,11 @@ if( empty($fname) || empty($lname) || empty($address) || empty($zip) || empty($c
 try{
     $db = openDB();
     //Suoritetaan parametrien lisääminen tietokantaan.
-    $sql = "SELECT as_tili.asiakasnro FROM as_tili
+    $sql = "SELECT as_tili.asiakasnro FROM as_tili where email=:email
     INNER JOIN tilaus ON as_tili.asiakasnro = tilaus.asiakasnro;
-    INSERT INTO tilaus (asiakasnro, tilauspvm) VALUES (?, curdate())";
+    INSERT INTO tilaus (asiakasnro, tilauspvm) VALUES (':email', curdate())";
     $statement = $db->prepare($sql);
-    //$statement->bindParam(1, $fname);
-    //$statement->bindParam(2, $lname);
+    $statement->bindParam(':email', $email);
     
     $statement->execute();
 
