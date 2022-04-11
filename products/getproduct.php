@@ -5,7 +5,8 @@ require_once '../inc/headers.php';
 $url = parse_url(filter_input(INPUT_SERVER, 'PATH_INFO'), PHP_URL_PATH);
 $parameters = explode('/',$url);
 $category_id = $parameters[1];
-$product_id = $parameters[2];
+//miten saa valittua useamman merkin koska id voi olla enemmän kuin 1 numero
+$product_id = $parameters[3];
 
 try {
     $db = openDB();
