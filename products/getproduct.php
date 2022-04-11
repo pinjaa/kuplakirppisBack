@@ -6,10 +6,8 @@ $url = parse_url(filter_input(INPUT_SERVER, 'PATH_INFO'), PHP_URL_PATH);
 $parameters = explode('/',$url);
 $category_id = $parameters[1];
 //miten saa valittua useamman merkin koska id voi olla enemmän kuin 1 numero
-/* $lastElement = count($parameters) - 1;
-$secondLastElement = count($parameters) - 2;
-$product_id = $lastElement + $secondLastElement; */
-$product_id = array_slice($parameters,2,3);
+$product_id = $parameters[2];
+
 
 try {
     $db = openDB();
