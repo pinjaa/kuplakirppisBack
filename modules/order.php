@@ -26,15 +26,33 @@ if( empty($fname) || empty($lname) || empty($address) || empty($zip) || empty($c
 
 try{
     $db = openDB();
+    $db->beginTransaction();
     //Suoritetaan parametrien lisääminen tietokantaan.
+    //$sql = "INSERT INTO tilaus (asiakasnro, tilauspvm) VALUES ((SELECT asiakasnro FROM as_tili where email=:email), curdate())"; jos kirjautuneena
+
+    $sql = "INSERT INTO as_tili (etunimi, sukunimi, email, osoite, postinro, postitmp, puhelinnro) VALUES (?,?,?,?,?,?,?);";
+
+    $statement = $db->prepare($sql);
+    $statement->bindParam(1, $fname, PDO::PARAM_STR);
+    $statement->bindParam(2, $lname, PDO::PARAM_STR);
+    $statement->bindParam(3, $email, PDO::PARAM_STR);
+    $statement->bindParam(4, $address, PDO::PARAM_STR);
+    $statement->bindParam(5, $zip, PDO::PARAM_STR);
+    $statement->bindParam(6, $city, PDO::PARAM_STR);
+    $statement->bindParam(7, $phone, PDO::PARAM_STR);
+    $statement->execute();
+
     $sql = "INSERT INTO tilaus (asiakasnro, tilauspvm) VALUES ((SELECT asiakasnro FROM as_tili where email=:email), curdate())";
 
     $statement = $db->prepare($sql);
     $statement->bindParam(':email', $email, PDO::PARAM_STR);
     $statement->execute();
 
+    $db->commit();
+
     echo "Henkilön ".$fname." ".$lname." tilaus lisätty tietokantaan."; 
 }catch(PDOException $e){
+    $db->rollBack();
     echo "Tilausta ei voitu lisätä<br>";
     echo $e->getMessage();
     header("Location:http://localhost:3000/");
