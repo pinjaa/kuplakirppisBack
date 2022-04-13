@@ -48,7 +48,7 @@ CREATE TABLE as_tili (
 DROP TABLE IF EXISTS tilaus;
 CREATE TABLE tilaus (
     tilausnro INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
-    tilauspvm DATE,
+    tilauspvm TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     asiakasnro INT
 );
 
