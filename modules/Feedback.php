@@ -26,9 +26,9 @@ try{
     //Suoritetaan parametrien lisääminen tietokantaan.
   //  $sql = "INSERT INTO tilaus (asiakasnro, tilauspvm) VALUES ((SELECT asiakasnro FROM as_tili where email=:email), curdate())";
 
-    $statement = $db->prepare($sql);
-    $statement->bindParam(':email', $email, PDO::PARAM_STR);
-    $statement->execute();
+   // $statement = $db->prepare($sql);
+   /*  $statement->bindParam(':email', $email, PDO::PARAM_STR);
+    $statement->execute(); */
 
     echo "Palaute lähetetty"; 
 }catch(PDOException $e){
