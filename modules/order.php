@@ -14,6 +14,7 @@ $zip=filter_var($input->postinro, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
 $city=filter_var($input->postitmp, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
 $email=filter_var($input->email, FILTER_SANITIZE_EMAIL);
 $phone=filter_var($input->puhelinnro, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+$cart = $input->cart;
 
 /* //Tarkistetaan onko muuttujia asetettu
 if( !isset($fname) || !isset($lname) || !isset($address) || !isset($zip) || !isset($city) || !isset($email) || !isset($phone)){
@@ -49,13 +50,22 @@ try{
 
     $order_id = executeInsert($db, $sql);
 
+    foreach ($cart as $key=>$item) {
+        $key++;
+        $sql = "INSERT INTO tilausrivi (rivinro, tilausnro, tuotenro) VALUES ("
+        .
+            $key . "," .
+            $order_id . "," .
+            $item->id
+        . ")";
+        executeInsert($db, $sql);
+    }
+
     $db->commit();
 
     header('HTTP/1.1 200 OK');
     $data = array('id' => $customer_id);
     echo json_encode($data);
-
-    echo "Henkilön ".$fname." ".$lname." tilaus lisätty tietokantaan."; 
 }catch(PDOException $e){
     $db->rollBack();
     echo "Tilausta ei voitu lisätä<br>";
