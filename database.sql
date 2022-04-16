@@ -37,7 +37,7 @@ CREATE TABLE as_tili (
     etunimi VARCHAR(150),
     sukunimi VARCHAR(150),
     salasana VARCHAR(150), 
-    email VARCHAR(150), 
+    email VARCHAR(150) UNIQUE, 
     osoite VARCHAR(150),
     postinro VARCHAR(5),
     postitmp VARCHAR(150),
