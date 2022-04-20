@@ -11,9 +11,9 @@ $categoryID=filter_var($input->categoryID,FILTER_SANITIZE_FULL_SPECIAL_CHARS);
 
 try{
     $db=openDB();
-    $sql="insert into tuote (tuotenimi,hinta,image,kuvaus,ktg_nro) values('$name','$price','placeholder.png','$description','$categoryID')";
+    $sql="insert into tuote (tuotenimi,hinta,kuvaus,ktg_nro) values('$name',$price,'$description',$categoryID)";
     executeInsert($db,$sql);
-    $data=array('id'=>$db->lastInsertID(),'name'=>$name,'price'=>$name,'image'=>'placeholder.png');
+    $data=array('id'=>$db->lastInsertID(),'name' => $name,'price' => $price, 'kuvaus' => $description, 'ktg_nro' => $categoryID);
     print json_encode($data);
 }catch(PDOException $pdoex){
     returnError($pdoex);
