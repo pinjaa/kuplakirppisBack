@@ -11,7 +11,7 @@ require_once "../inc/headers.php";
  $pword = filter_input(INPUT_POST, "salasana");
 
 
- //Tarkistetaan onko muttujia asetettu
+ /*//Tarkistetaan onko muttujia asetettu
  if( !isset($email) || !isset($pword) ){
      echo "Parametreja puuttui!! Ei voida kirjautua.";
      exit;
@@ -22,7 +22,7 @@ require_once "../inc/headers.php";
  if( empty($email) || empty($pword) ){
      echo "Et voi asettaa tyhjiä arvoja!!";
      exit;
- }
+ }*/
 
  try{
     $db = openDB();
