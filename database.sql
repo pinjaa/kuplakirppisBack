@@ -155,3 +155,7 @@ INSERT INTO tuote(tuotenimi, hinta, ktg_nro, image, kuvaus) values ("JBL bluetoo
 INSERT INTO tuote(tuotenimi, hinta, ktg_nro, image, kuvaus) values ("JBL bluetooth-kaijutin", 5, 2, "IMG_7006.jpg",
     "Söpö ja käytännöllinen JBL kaijutin. Huono äänenlaatu mutta mahtuu taskuun.
     Saattaa olla vedenkestävä en oo testannu.");
+
+
+-- admin tunnukset
+INSERT INTO kayttaja_tili(email, salasana, admin_oikeus) values ("admin@admin.com", "salasana", "K");
