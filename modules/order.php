@@ -32,7 +32,7 @@ try{
     $db = openDB();
     $db->beginTransaction();
     //Suoritetaan parametrien lisääminen tietokantaan.
-    //$sql = "INSERT INTO tilaus (asiakasnro, tilauspvm) VALUES ((SELECT asiakasnro FROM kayttaja_tili where email=:email), curdate())"; jos kirjautuneena
+    //$sql = "INSERT INTO tilaus (asiakasnro, tilauspvm) VALUES ((SELECT id FROM kayttaja_tili where email=:email), curdate())"; jos kirjautuneena
 
     $sql = "INSERT INTO kayttaja_tili (etunimi, sukunimi, email, osoite, postinro, postitmp, puhelinnro) VALUES ('" .
         filter_var($fname, FILTER_SANITIZE_FULL_SPECIAL_CHARS) . "','" .
