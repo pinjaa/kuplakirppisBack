@@ -24,7 +24,7 @@ if( empty($fname) || empty($lname) || empty($email) || empty($phone)){
 try{
     $db = openDB();
     //Suoritetaan parametrien lisääminen tietokantaan.
-  //  $sql = "INSERT INTO tilaus (asiakasnro, tilauspvm) VALUES ((SELECT asiakasnro FROM as_tili where email=:email), curdate())";
+  //  $sql = "INSERT INTO tilaus (asiakasnro, tilauspvm) VALUES ((SELECT id FROM kayttaja_tili where email=:email), curdate())";
 
    // $statement = $db->prepare($sql);
    /*  $statement->bindParam(':email', $email, PDO::PARAM_STR);

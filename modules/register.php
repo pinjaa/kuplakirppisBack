@@ -24,7 +24,7 @@ if( empty($fname) || empty($lname) || empty($pword)|| empty($email)){
 try{
     $db = openDB();
     //Suoritetaan parametrien lisääminen tietokantaan.
-    $sql = "INSERT INTO as_tili (etunimi, sukunimi, salasana, email) VALUES (?,?,?,?)";
+    $sql = "INSERT INTO kayttaja_tili (etunimi, sukunimi, salasana, email) VALUES (?,?,?,?)";
     $statement = $db->prepare($sql);
     $statement->bindParam(1, $fname);
     $statement->bindParam(2, $lname);

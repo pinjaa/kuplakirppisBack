@@ -27,7 +27,7 @@ require_once "../inc/headers.php";
  try{
     $db = openDB();
      //Haetaan käyttäjä annetulla sähköpostiosoitteella
-     $sql = "SELECT * FROM as_tili WHERE email=?";
+     $sql = "SELECT * FROM kayttaja_tili WHERE email=?";
      $statement = $db->prepare($sql);
      $statement->bindParam(1, $email);
      $statement->execute();
