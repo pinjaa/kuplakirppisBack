@@ -30,10 +30,10 @@ CREATE TABLE tuotekuva (
     PRIMARY KEY (id, nro)
 );
 
--- asiakastili taulu
-DROP TABLE IF EXISTS as_tili;
-CREATE TABLE as_tili (
-    asiakasnro int NOT NULL PRIMARY KEY AUTO_INCREMENT,
+-- käyttäjätili taulu
+DROP TABLE IF EXISTS kayttaja_tili;
+CREATE TABLE kayttaja_tili (
+    id int NOT NULL PRIMARY KEY AUTO_INCREMENT,
     etunimi VARCHAR(150),
     sukunimi VARCHAR(150),
     salasana VARCHAR(150), 
@@ -41,7 +41,8 @@ CREATE TABLE as_tili (
     osoite VARCHAR(150),
     postinro VARCHAR(5),
     postitmp VARCHAR(150),
-    puhelinnro VARCHAR(10)
+    puhelinnro VARCHAR(10),
+    admin_oikeus VARCHAR(1)
 );
 
 -- tilaus taulu
@@ -64,7 +65,7 @@ CREATE TABLE tilausrivi (
 
 -- foreign key lisäykset, ei toimineet taulujen luonnin yhteydessä
 ALTER TABLE tilaus
-ADD FOREIGN KEY (asiakasnro) REFERENCES as_tili(asiakasnro);
+ADD FOREIGN KEY (asiakasnro) REFERENCES kayttaja_tili(id);
 
 ALTER TABLE tuote
 ADD FOREIGN KEY (ktg_nro) REFERENCES kategoria(ktg_nro);
