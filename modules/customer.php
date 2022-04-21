@@ -53,7 +53,7 @@ try{
         $type = $_FILES['file']['type'];
 
         if ($type === 'image/png') {
-            $path ='uploads/' . basename($filename);
+            $path ='../uploads/' . basename($filename);
 
             if (move_uploaded_file($_FILES['file']['tmp_name'],$path)) {
                 $data = array('filename' => $filename, 'type' => $type,'text' => $text);
