@@ -2,14 +2,25 @@
 require_once "../inc/functions.php";
 require_once "../inc/headers.php";
 
+$email = filter_input(INPUT_POST,"email",FILTER_SANITIZE_EMAIL);
+  $pword = filter_input(INPUT_POST, "salasana");
 
-function login() {
+if(!isset($_SESSION["email"])) {
+    try {
+        login($email, $pword);
+        header("Location: http://localhost:3000/");
+    } catch (Exception $e) {
+        echo '<div class="alert alert-danger" role="alert">'.$e->getMessage().'</div>';
+    }
+}
+
+function login($email, $pword) {
      //Käynnistetään sessio, johon talletetaan käyttäjä, jos kirjautuminen onnistuu
     session_start();
     /*  $fname = filter_input(INPUT_POST, "etunimi");
   $lname = filter_input(INPUT_POST, "sukunimi"); */
-  $email = filter_input(INPUT_POST,"email",FILTER_SANITIZE_EMAIL);
-  $pword = filter_input(INPUT_POST, "salasana");
+  //$email = filter_input(INPUT_POST,"email",FILTER_SANITIZE_EMAIL);
+  //$pword = filter_input(INPUT_POST, "salasana");
  
  
   /*//Tarkistetaan onko muttujia asetettu
@@ -57,7 +68,7 @@ function login() {
       echo "Kirjautuminen ei onnistunut<br>";
       echo $e->getMessage();
           //Ohjataan takaisin etusivulle
-          header("Location:http://localhost:3000/");
+          header("Location: http://localhost:3000/");
   }
 }
 
