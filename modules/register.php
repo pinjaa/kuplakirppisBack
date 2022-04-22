@@ -8,7 +8,7 @@ $fname = filter_input(INPUT_POST, "etunimi");
 $lname = filter_input(INPUT_POST, "sukunimi");
 $pword=filter_input(INPUT_POST, "salasana");
 $email=filter_input(INPUT_POST,"email",FILTER_SANITIZE_EMAIL);
-
+/*
 //Tarkistetaan onko muttujia asetettu
 if( !isset($fname) || !isset($lname) || !isset($pword)|| !isset($email)){
     echo "Parametreja puuttui!! Ei voida lisätä henkilöä";
@@ -19,7 +19,7 @@ if( !isset($fname) || !isset($lname) || !isset($pword)|| !isset($email)){
 if( empty($fname) || empty($lname) || empty($pword)|| empty($email)){
     echo "Et voi asettaa tyhjiä arvoja!!";
     exit;
-}
+}*/
 
 try{
     $db = openDB();
