@@ -90,7 +90,7 @@ INSERT INTO kategoria (ktg_nimi) values ('Koti');
 INSERT INTO kategoria (ktg_nimi) values ('Vapaa-aika');
 
 -- tuotteiden lisäys
-INSERT INTO tuote(tuotenimi, hinta, ktg_nro, image, kuvaus) values ("Auto", 50, 3, "https://cdn.pixabay.com/photo/2012/05/29/00/43/car-49278_1280.jpg", "Loistava ja nopea auto.");
+INSERT INTO tuote(tuotenimi, hinta, ktg_nro, image, kuvaus) values ("Auto", 1500, 3, "IMG_20200803_191749_Bokeh.jpg", "Loistava auto 1,4 moottorilla. Ei vikoja.");
 INSERT INTO tuote(tuotenimi, hinta, ktg_nro, image, kuvaus) values ("Kannettava tietokone, Acer", 80, 2, "IMG_6963.jpg",
     "Hyvin toimiva lähes uusi Acerin läppäri. Sisältää intel i5 7000 jotain CPU:n. Hyvin pyörii pasianssi grandmaster");
 INSERT INTO tuote(tuotenimi, hinta, ktg_nro, image, kuvaus) values ("Panasonic stereo", 15, 4, "IMG_6966.jpg",

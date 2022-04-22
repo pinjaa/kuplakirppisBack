@@ -36,10 +36,11 @@ try{
     $statement->bindParam(4,$email);
     $statement->execute();
 
-    echo "Tervetuloa ".$fname." ".$lname.". Sinut on lisätty tietokantaan sähköpostilla "."$email"; 
+    echo json_encode("Tervetuloa ".$fname." ".$lname.". Sinut on lisätty tietokantaan sähköpostilla "."$email");
+    header("Location:http://localhost:3000/pages/Register");
 }catch(PDOException $e){
-    echo "Käyttäjää ei voitu lisätä<br>";
-    echo $e->getMessage();
+  //echo "Käyttäjää ei voitu lisätä<br>";
+   // echo $e->getMessage();
     header("Location:http://localhost:3000/");
 }
 
