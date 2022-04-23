@@ -52,7 +52,6 @@ function login() {
       }
   
       $row = $statement->fetch();
- 
       //Tarkistetaan käyttäjän antama salasana tietokannan salasanaa vasten
       if(!password_verify($pword, $row["salasana"] )){
           echo "Väärä salasana!!";
@@ -64,7 +63,8 @@ function login() {
      /*  $_SESSION["fname"] = $row["etunimi"];
       $_SESSION["lname"] = $row["sukunimi"]; */
  
-      echo "Tervetuloa. Kirjautuminen onnistui "."$email"; 
+      echo "Tervetuloa. Kirjautuminen onnistui "."$email";
+      exit; //POISTA KUN ALERTTI TOIMII
  
   }catch(PDOException $e){
       echo "Kirjautuminen ei onnistunut<br>";
