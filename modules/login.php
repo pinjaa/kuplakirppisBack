@@ -2,20 +2,22 @@
 require_once "../inc/functions.php";
 require_once "../inc/headers.php";
 
-$email = filter_input(INPUT_POST,"email",FILTER_SANITIZE_EMAIL);
-  $pword = filter_input(INPUT_POST, "salasana");
+
 
 if(!isset($_SESSION["email"])) {
     try {
-        login($email, $pword);
+        login();
         header("Location: http://localhost:3000/");
     } catch (Exception $e) {
         echo '<div class="alert alert-danger" role="alert">'.$e->getMessage().'</div>';
     }
 }
 
-function login($email, $pword) {
-     //Käynnistetään sessio, johon talletetaan käyttäjä, jos kirjautuminen onnistuu
+function login() {
+    $email = filter_input(INPUT_POST,"email",FILTER_SANITIZE_EMAIL);
+    $pword = filter_input(INPUT_POST, "salasana", FILTER_SANITIZE_FULL_SPECIAL_CHARS); 
+
+    //Käynnistetään sessio, johon talletetaan käyttäjä, jos kirjautuminen onnistuu
     session_start();
     /*  $fname = filter_input(INPUT_POST, "etunimi");
   $lname = filter_input(INPUT_POST, "sukunimi"); */
@@ -39,12 +41,12 @@ function login($email, $pword) {
   try{
      $db = openDB();
       //Haetaan käyttäjä annetulla sähköpostiosoitteella
-      $sql = "SELECT * FROM kayttaja_tili WHERE email=?";
+      $sql = "SELECT * FROM kayttaja_tili WHERE email='$email'";
       $statement = $db->prepare($sql);
-      $statement->bindParam(1, $email);
       $statement->execute();
- 
-      if($statement->rowCount() <=0){
+
+      $rows = $db->query($sql)->fetchAll();
+      if(count($rows) <=0){
           echo "Käyttäjää ei löydy!!";
           exit;
       }
