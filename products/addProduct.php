@@ -13,7 +13,7 @@ try{
     $db=openDB();
     $sql="insert into tuote (tuotenimi,hinta,kuvaus,ktg_nro) values('$name',$price,'$description',$categoryID)";
     executeInsert($db,$sql);
-    $data=array('id'=>$db->lastInsertID(),'name' => $name,'price' => $price, 'kuvaus' => $description, 'ktg_nro' => $categoryID);
+    $data=array('id'=>$db->lastInsertID(),'tuotenimi' => $name,'hinta' => $price, 'kuvaus' => $description, 'ktg_nro' => $categoryID);
     print json_encode($data);
 }catch(PDOException $pdoex){
     returnError($pdoex);
