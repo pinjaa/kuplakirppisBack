@@ -30,15 +30,9 @@ try{
         $statement->bindParam(5,$user, PDO::PARAM_STR);
         $statement->execute();
         
-        $string = "Tervetuloa sinut on lisätty tietokantaan sähköpostilla ";
+        $string = "Tervetuloa sinut on lisätty tietokantaan sähköpostilla $email";
 
-        $parts = [];
-        $tok = strtok($string, " ");
-        while ($tok !== false) {
-            $parts[] = $tok;
-            $tok = strtok(" ");
-        }
-        echo json_encode($parts),"\n";
+        echo json_encode($string);
         header("Location: http://localhost:3000/pages/Register");
     } else {
         //Suoritetaan parametrien lisääminen tietokantaan.
