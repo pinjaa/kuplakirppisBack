@@ -33,7 +33,7 @@ try{
         $string = "Tervetuloa sinut on lisätty tietokantaan sähköpostilla $email";
 
         echo json_encode($string);
-        header("Location: http://localhost:3000/pages/Register");
+        //header("Location: http://localhost:3000/pages/Register");
     } else {
         //Suoritetaan parametrien lisääminen tietokantaan.
         $sql = "INSERT INTO kayttaja_tili (etunimi, sukunimi, salasana, email, admin_oikeus) VALUES (?,?,?,?,?)";
@@ -48,7 +48,7 @@ try{
         $statement->bindParam(5,$user, PDO::PARAM_STR);
         $statement->execute();
 
-       // print json_encode("Tervetuloa ".$fname." ".$lname.". Sinut on lisätty tietokantaan sähköpostilla "."$email");
+        //print json_encode("Tervetuloa ".$fname." ".$lname.". Sinut on lisätty tietokantaan sähköpostilla "."$email");
         header("Location: http://localhost:3000/pages/Register");
     }
     
