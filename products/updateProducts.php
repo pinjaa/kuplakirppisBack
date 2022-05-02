@@ -14,7 +14,7 @@ $description=filter_var($input->description,FILTER_SANITIZE_FULL_SPECIAL_CHARS);
 
 try{
     $db=openDB();
-    $sql="update table tuote SET tuotenimi = '$name', hinta = $price, kuvaus = '$description' WHERE id = $product_id";
+    $sql="update tuote SET tuotenimi = COALESCE(NULLIF('$name', ''), tuotenimi), hinta = COALESCE(NULLIF($price, ''), hinta), kuvaus = COALESCE(NULLIF('$description', ''), kuvaus) WHERE id = $product_id";
     executeInsert($db,$sql);
     $data=array('id'=>$product_id,'tuotenimi' => $name,'hinta' => $price, 'kuvaus' => $description);
     print json_encode($data);
