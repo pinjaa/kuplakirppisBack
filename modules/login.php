@@ -6,10 +6,12 @@ if(!isset($_SESSION["email"])) {
     try {
         login();
         //header("Location: http://localhost:3000/");
-    } catch (Exception $e) {
+    }
+
+    catch (Exception $e) {
         echo '<div class="alert alert-danger" role="alert">'.$e->getMessage().'</div>';
     }
-}
+}   
 
 function login() {
 
@@ -57,7 +59,7 @@ function login() {
         
         $nimi = $row["etunimi"];
         $statement->bindValue(':etunimi', $nimi ,PDO::PARAM_STR);
-        echo "Tervetuloa. Kirjautuminen onnistui $nimi";
+        echo "Tervetuloa $nimi!";
       }
   }catch(PDOException $e){
       echo "Kirjautuminen ei onnistunut<br>";
@@ -65,15 +67,9 @@ function login() {
   }
 }
 
-function logout() {
-    //Tyhjennetään ja tuhotaan nykyinen sessio.
-    try{
-        session_unset();
-        session_destroy();
-    }catch(Exception $e){
-        throw $e;
-    }
-}
+
+
+
 ?>
 
 
