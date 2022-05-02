@@ -56,6 +56,7 @@ function login() {
 
             $_SESSION["email"] = $email;
             echo "Tervetuloa admin.";
+            $_SESSION["isAdmin"] = true;
 
       }else if(!password_verify($pword, $row["salasana"] )){
           echo "Väärä salasana!!";
@@ -64,6 +65,13 @@ function login() {
         $_SESSION["email"] = $email;
         /*  $_SESSION["fname"] = $row["etunimi"];
         $_SESSION["lname"] = $row["sukunimi"]; */
+
+        if($row["admin_oikeus"] == 'K') {
+            $_SESSION["isAdmin"] = true;
+        }else {
+            $_SESSION["isAdmin"] = false;
+        }
+        
     
         echo "Tervetuloa. Kirjautuminen onnistui $email";
       }
