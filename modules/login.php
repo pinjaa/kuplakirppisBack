@@ -26,7 +26,7 @@ function login() {
 
     //Käynnistetään sessio, johon talletetaan käyttäjä, jos kirjautuminen onnistuu
     session_start();
- 
+    
  
   try{
      $db = openDB();
@@ -69,23 +69,17 @@ function login() {
       echo $e->getMessage();
   }
 }
+
+
 function logout() {
     //Tyhjennetään ja tuhotaan nykyinen sessio.
     try{ 
-        $db = openDB();
-        //Haetaan käyttäjä annetulla sähköpostiosoitteella
-        $sql = "SELECT * FROM kayttaja_tili";
-        $statement = $db->prepare($sql);
-        $statement->execute();
-  
-        $rows = $db->query($sql)->fetchAll();
-        $row = $statement->fetch();
-        $nimi = $row["etunimi"];
-        $statement->bindValue(':etunimi', $nimi ,PDO::PARAM_STR);
-        echo "Tervetuloa uudelleen $nimi!";
+
         session_unset();
         session_destroy();
     }catch(Exception $e){
+        session_unset();
+        session_destroy();
         throw $e;
     }
 }
