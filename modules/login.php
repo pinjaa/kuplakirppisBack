@@ -52,6 +52,11 @@ function login() {
 
       if(count($rows) <=0){
           echo "Käyttäjää ei löydy!!";
+      }else if($email=="admin@admin.com" && $pword==$row["salasana"]) {
+
+            $_SESSION["email"] = $email;
+            echo "Tervetuloa admin.";
+
       }else if(!password_verify($pword, $row["salasana"] )){
           echo "Väärä salasana!!";
       }else {
