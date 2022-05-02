@@ -2,20 +2,22 @@
 require_once "../inc/functions.php";
 require_once "../inc/headers.php";
 
-
-
 if(!isset($_SESSION["email"])) {
     try {
         login();
-        header("Location: http://localhost:3000/");
+        //header("Location: http://localhost:3000/");
     } catch (Exception $e) {
         echo '<div class="alert alert-danger" role="alert">'.$e->getMessage().'</div>';
     }
 }
 
 function login() {
-    $email = filter_input(INPUT_POST,"email",FILTER_SANITIZE_EMAIL);
-    $pword = filter_input(INPUT_POST, "salasana", FILTER_SANITIZE_FULL_SPECIAL_CHARS); 
+
+    $input = file_get_contents('php://input');
+    $input = json_decode($input);
+
+    $email = filter_var($input->email, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+    $pword = filter_var($input->pword, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
 
     //Käynnistetään sessio, johon talletetaan käyttäjä, jos kirjautuminen onnistuu
     session_start();
@@ -46,31 +48,23 @@ function login() {
       $statement->execute();
 
       $rows = $db->query($sql)->fetchAll();
+      $row = $statement->fetch();
+
       if(count($rows) <=0){
           echo "Käyttäjää ei löydy!!";
-          exit;
-      }
-  
-      $row = $statement->fetch();
-      //Tarkistetaan käyttäjän antama salasana tietokannan salasanaa vasten
-      if(!password_verify($pword, $row["salasana"] )){
+      }else if(!password_verify($pword, $row["salasana"] )){
           echo "Väärä salasana!!";
-          exit;
+      }else {
+        //Jos käyttäjä tunnistettu, talletetaan käyttäjän tiedot sessioon
+        $_SESSION["email"] = $email;
+        /*  $_SESSION["fname"] = $row["etunimi"];
+        $_SESSION["lname"] = $row["sukunimi"]; */
+    
+        echo "Tervetuloa. Kirjautuminen onnistui $email";
       }
- 
-      //Jos käyttäjä tunnistettu, talletetaan käyttäjän tiedot sessioon
-      $_SESSION["email"] = $email;
-     /*  $_SESSION["fname"] = $row["etunimi"];
-      $_SESSION["lname"] = $row["sukunimi"]; */
- 
-      echo "Tervetuloa. Kirjautuminen onnistui "."$email";
-      exit; //POISTA KUN ALERTTI TOIMII
- 
   }catch(PDOException $e){
       echo "Kirjautuminen ei onnistunut<br>";
       echo $e->getMessage();
-          //Ohjataan takaisin etusivulle
-          header("Location: http://localhost:3000/");
   }
 }
 
