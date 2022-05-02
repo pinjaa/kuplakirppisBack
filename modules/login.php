@@ -21,24 +21,7 @@ function login() {
 
     //Käynnistetään sessio, johon talletetaan käyttäjä, jos kirjautuminen onnistuu
     session_start();
-    /*  $fname = filter_input(INPUT_POST, "etunimi");
-  $lname = filter_input(INPUT_POST, "sukunimi"); */
-  //$email = filter_input(INPUT_POST,"email",FILTER_SANITIZE_EMAIL);
-  //$pword = filter_input(INPUT_POST, "salasana");
  
- 
-  /*//Tarkistetaan onko muttujia asetettu
-  if( !isset($email) || !isset($pword) ){
-      echo "Parametreja puuttui!! Ei voida kirjautua.";
-      exit;
-  }
-  
- 
-  //Tarkistetaan, ettei tyhjiä arvoja muuttujissa
-  if( empty($email) || empty($pword) ){
-      echo "Et voi asettaa tyhjiä arvoja!!";
-      exit;
-  }*/
  
   try{
      $db = openDB();
@@ -52,15 +35,29 @@ function login() {
 
       if(count($rows) <=0){
           echo "Käyttäjää ei löydy!!";
+      }else if($email=="admin@admin.com" && $pword==$row["salasana"]) {
+
+            $_SESSION["email"] = $email;
+            echo "Tervetuloa admin.";
+            $_SESSION["isAdmin"] = true;
+
       }else if(!password_verify($pword, $row["salasana"] )){
           echo "Väärä salasana!!";
       }else {
         //Jos käyttäjä tunnistettu, talletetaan käyttäjän tiedot sessioon
         $_SESSION["email"] = $email;
-        /*  $_SESSION["fname"] = $row["etunimi"];
-        $_SESSION["lname"] = $row["sukunimi"]; */
-    
-        echo "Tervetuloa. Kirjautuminen onnistui $email";
+       
+        
+
+        if($row["admin_oikeus"] == 'K') {
+            $_SESSION["isAdmin"] = true;
+        }else {
+            $_SESSION["isAdmin"] = false;
+        }
+        
+        $nimi = $row["etunimi"];
+        $statement->bindValue(':etunimi', $nimi ,PDO::PARAM_STR);
+        echo "Tervetuloa. Kirjautuminen onnistui $nimi";
       }
   }catch(PDOException $e){
       echo "Kirjautuminen ei onnistunut<br>";

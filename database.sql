@@ -158,4 +158,4 @@ INSERT INTO tuote(tuotenimi, hinta, ktg_nro, image, kuvaus) values ("JBL bluetoo
 
 
 -- admin tunnukset
-INSERT INTO kayttaja_tili(email, salasana, admin_oikeus) values ("admin@admin.com", SHA2("admin", 224), "K");
+INSERT INTO kayttaja_tili(email, salasana, admin_oikeus) values ("admin@admin.com", "admin", "K");
