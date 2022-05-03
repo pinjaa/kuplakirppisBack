@@ -39,31 +39,45 @@ function login() {
       $row = $statement->fetch();
 
       if(count($rows) <=0){
-          echo "Käyttäjää ei löydy!!";
+          $msg = "Käyttäjää ei löydy!!";
+          $isAdmin = false;
+          $success = false;
       }else if($email=="admin@admin.com" && $pword==$row["salasana"]) {
 
             $_SESSION["email"] = $email;
-            echo "Tervetuloa admin.";
-            $_SESSION["isAdmin"] = true;
+            $nimi = "admin";
+            $isAdmin = true;
+            $success = true;
+            
+            $msg = "Tervetuloa $nimi!";
 
       }else if(!password_verify($pword, $row["salasana"] )){
-          echo "Väärä salasana!!";
+          $msg = "Väärä salasana!!";
+          $isAdmin = false;
+          $success = false;
       }else {
         //Jos käyttäjä tunnistettu, talletetaan käyttäjän tiedot sessioon
         $_SESSION["email"] = $email;
-       
-        
 
         if($row["admin_oikeus"] == 'K') {
-            $_SESSION["isAdmin"] = true;
+            $isAdmin = true;
         }else {
-            $_SESSION["isAdmin"] = false;
+            $isAdmin = false;
         }
         
         $nimi = $row["etunimi"];
         $statement->bindValue(':etunimi', $nimi ,PDO::PARAM_STR);
-        echo "Tervetuloa $nimi!";
+
+        $success = true;
+        $msg = "Tervetuloa $nimi!";
       }
+
+    header('Content-Type: application/json');
+    echo json_encode(array(
+        "msg" => $msg,
+        "isAdmin" => $isAdmin,
+        "success" => $success
+    ));
   }catch(PDOException $e){
       echo "Kirjautuminen ei onnistunut<br>";
       echo $e->getMessage();
