@@ -5,8 +5,6 @@ require_once "../inc/headers.php";
 $input = file_get_contents('php://input');
 $input = json_decode($input);
 
-//Filtteroidaan POST-inputit (ei käytetä string-filtteriä, koska deprekoitunut)
-//Jos parametria ei löydy, funktio palauttaa null
 $fname = filter_var($input->fname, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
 $lname = filter_var($input->lname, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
 $pword=filter_var($input->pword, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
@@ -33,7 +31,7 @@ try{
         $string = "Tervetuloa sinut on lisätty tietokantaan sähköpostilla $email";
 
         echo json_encode($string);
-        //header("Location: http://localhost:3000/pages/Register");
+        
     } else {
         //Suoritetaan parametrien lisääminen tietokantaan.
         $sql = "INSERT INTO kayttaja_tili (etunimi, sukunimi, salasana, email, admin_oikeus) VALUES (?,?,?,?,?)";
@@ -48,14 +46,14 @@ try{
         $statement->bindParam(5,$user, PDO::PARAM_STR);
         $statement->execute();
 
-        //print json_encode("Tervetuloa ".$fname." ".$lname.". Sinut on lisätty tietokantaan sähköpostilla "."$email");
-        header("Location: http://localhost:3000/pages/Register");
+        $string = "Tervetuloa sinut on lisätty tietokantaan sähköpostilla $email";
+
+        echo json_encode($string);
+
     }
     
 }catch(PDOException $e){
-  //echo "Käyttäjää ei voitu lisätä<br>";
     echo $e->getMessage();
-    //header("Location: http://localhost:3000/");
 }
 
 ?>
